@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, ExternalLink, ChevronLeft, ChevronRight, CheckCircle2, Folder } from 'lucide-react';
 import { ProjectItem } from '../data/portfolioData';
+import { resolveAsset } from '../utils/assets';
 
 interface ProjectLightboxProps {
   project: ProjectItem | null;
@@ -73,21 +74,34 @@ export const ProjectLightbox: React.FC<ProjectLightboxProps> = ({
           </div>
         </div>
 
-        {/* Media Banner */}
+        {/* Media Banner: Video for Nakoosh, Image for other case studies */}
         <div className="relative aspect-[16/9] w-full bg-slate-950 overflow-hidden">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#090d16] via-transparent to-transparent opacity-80" />
+          {project.id === 'nakoosh-clothing-initiatives' ? (
+            <video
+              autoPlay
+              loop
+              muted
+              controls
+              playsInline
+              className="w-full h-full object-contain bg-black"
+            >
+              <source src={resolveAsset('assets/clients/nakoosh_client_campaign.mp4')} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              src={resolveAsset(project.image)}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#090d16] via-transparent to-transparent opacity-70 pointer-events-none" />
           
-          <div className="absolute bottom-6 left-6 right-6">
-            <h2 className="text-2xl sm:text-3xl font-bold font-display text-white">
+          <div className="absolute bottom-4 left-6 right-6 pointer-events-none">
+            <h2 className="text-xl sm:text-2xl font-bold font-display text-white">
               {project.title}
             </h2>
-            <p className="text-xs sm:text-sm text-cyan-300 mt-1 font-medium">
-              Role: {project.role}
+            <p className="text-xs text-cyan-300 mt-0.5 font-medium">
+              Client: {project.client} · Role: {project.role}
             </p>
           </div>
         </div>

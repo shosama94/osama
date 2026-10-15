@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArrowUpRight, Layers } from 'lucide-react';
 import { PORTFOLIO_DATA, ProjectItem } from '../data/portfolioData';
+import { resolveAsset } from '../utils/assets';
 
 interface CaseStudiesProps {
   onSelectProject: (project: ProjectItem) => void;
@@ -70,11 +71,14 @@ export const CaseStudies = ({ onSelectProject }: CaseStudiesProps) => {
               {/* Media Preview Box */}
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
                 <img
-                  src={project.image}
+                  src={resolveAsset(project.image)}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
-                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    // Fallback to placeholder if image fails to load
+                    (e.target as HTMLElement).style.opacity = '0.7';
+                  }}
                 />
                 
                 {/* Visual Scrim */}

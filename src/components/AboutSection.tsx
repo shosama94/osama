@@ -1,5 +1,6 @@
-import React from 'react';
-import { User, Sparkles, TrendingUp, ShieldCheck, Target } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { User, Sparkles, TrendingUp, ShieldCheck, Target, Play, Pause, Volume2, VolumeX, Video } from 'lucide-react';
+import { resolveAsset } from '../utils/assets';
 
 interface ClientItem {
   name: string;
@@ -9,6 +10,26 @@ interface ClientItem {
 }
 
 export const AboutSection: React.FC = () => {
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+    }
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+  };
+
   const pillars = [
     {
       icon: TrendingUp,
@@ -41,13 +62,13 @@ export const AboutSection: React.FC = () => {
     {
       name: 'Jinnah Builders',
       category: 'Bahria Town Real Estate',
-      image: './assets/clients/jinnah_builders.png',
+      image: 'assets/clients/jinnah_builders.png',
       highlight: 'Targeted Facebook Lead Ads & Real Estate Web Architecture'
     },
     {
       name: 'Digital Gravity',
       category: 'Digital Agency',
-      image: './assets/clients/digital_gravity.jpg',
+      image: 'assets/clients/digital_gravity.jpg',
       highlight: 'Technical SEO Audits, Backlink Building & SERP Intelligence'
     },
     {
@@ -58,25 +79,25 @@ export const AboutSection: React.FC = () => {
     {
       name: 'Reliable Technical Services',
       category: 'Engineering & Services',
-      image: './assets/clients/reliable_technical_services.png',
+      image: 'assets/clients/reliable_technical_services.png',
       highlight: 'B2B Brand Footprint & Organic Search Visibility'
     },
     {
       name: 'Capital Health (CHSC)',
       category: 'Healthcare & Clinical Services',
-      image: './assets/clients/capital_health.jpg',
+      image: 'assets/clients/capital_health.jpg',
       highlight: 'Digital Healthcare Marketing & Social Positioning'
     },
     {
       name: 'Denim Crafts',
       category: 'Textile & Apparel Export',
-      image: './assets/clients/denim_crafts.jpeg',
+      image: 'assets/clients/denim_crafts.jpeg',
       highlight: 'E-commerce Media Production & Brand Presentation'
     },
     {
       name: 'Digital Express',
       category: 'Marketing Solutions',
-      image: './assets/clients/digital_express.png',
+      image: 'assets/clients/digital_express.png',
       highlight: 'Paid Performance Ad Management & Social Media Handling'
     },
     {
@@ -87,7 +108,7 @@ export const AboutSection: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-[#06080d] border-t border-slate-900">
+    <section id="about" className="py-24 md:py-32 bg-[#06080d] border-t border-slate-900 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
         
         {/* Section Header */}
@@ -127,59 +148,118 @@ export const AboutSection: React.FC = () => {
           })}
         </div>
 
-        {/* Client Brands Roster with Real Logos & Appropriate Images (NO VIDEO) */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/30 border border-slate-800/80 space-y-6">
+        {/* Client Brands Worked With & Live Client Commercial Video Showcase */}
+        <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/30 border border-slate-800/80 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-cyan-400" />
               <h3 className="text-base font-bold font-display text-white">
-                Selected Client Brands & Corporate Ecosystems
+                Selected Client Brands & Live Content Video Showcase
               </h3>
             </div>
             <span className="text-xs text-slate-400 font-mono">
-              Verified Professional Engagements
+              Verified Professional Engagements & Creative Production
             </span>
           </div>
 
-          {/* Clean 10-Brand Grid with Real Logos and Clear Roles */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {clientShowcase.map((client, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-cyan-500/30 hover:bg-slate-900/60 transition-all flex items-center gap-4 text-left group"
-              >
-                {/* Client Logo Image Container */}
-                <div className="w-14 h-14 rounded-xl bg-slate-900 border border-slate-800 p-2 flex items-center justify-center shrink-0 overflow-hidden group-hover:border-slate-700 transition-colors">
-                  {client.image ? (
-                    <img
-                      src={client.image}
-                      alt={`${client.name} logo`}
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                  ) : (
-                    <span className="text-sm font-bold font-display text-cyan-400 tracking-wider">
-                      {client.name.split(' ').map(w => w[0]).join('').slice(0, 3)}
-                    </span>
-                  )}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Live Playing Client Video */}
+            <div className="lg:col-span-5 space-y-3">
+              <div className="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl group max-w-sm mx-auto">
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  className="w-full aspect-[9/13] object-cover cursor-pointer"
+                  onClick={togglePlay}
+                  title="Click to toggle playback"
+                >
+                  <source src={resolveAsset('assets/clients/nakoosh_client_campaign.mp4')} type="video/mp4" />
+                </video>
+
+                {/* Floating Media Controls */}
+                <div className="absolute top-3 right-3 flex items-center gap-2 z-10">
+                  <button
+                    onClick={togglePlay}
+                    className="p-2 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md text-white transition-colors"
+                    aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                  >
+                    {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
+                  </button>
+                  <button
+                    onClick={toggleMute}
+                    className="p-2 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md text-white transition-colors"
+                    aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                  >
+                    {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-cyan-400" />}
+                  </button>
                 </div>
 
-                <div className="space-y-0.5 min-w-0">
-                  <p className="text-sm font-bold text-slate-100 truncate group-hover:text-cyan-300 transition-colors">
-                    {client.name}
+                {/* Video Info Tag */}
+                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 text-left">
+                  <div className="flex items-center gap-1.5 text-pink-400 text-[10px] font-mono uppercase font-bold mb-0.5">
+                    <Video className="w-3 h-3" />
+                    <span>Commercial Client Video Reel</span>
+                  </div>
+                  <p className="text-xs font-bold text-white">
+                    Nakoosh - Maisori Prêt Collection Drop
                   </p>
-                  <p className="text-[11px] text-cyan-400 font-medium">
-                    {client.category}
-                  </p>
-                  <p className="text-[11px] text-slate-400 truncate leading-snug">
-                    {client.highlight}
+                  <p className="text-[11px] text-slate-300 leading-tight mt-0.5">
+                    Short-form creative video reel driving customer inquiries & social orders.
                   </p>
                 </div>
               </div>
-            ))}
+              <p className="text-center text-[11px] text-slate-500">
+                Live commercial asset produced for client seasonal collection drop
+              </p>
+            </div>
+
+            {/* Clean Client Logos Grid */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {clientShowcase.map((client, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-cyan-500/30 hover:bg-slate-900/60 transition-all flex items-center gap-3.5 text-left group"
+                  >
+                    {/* Client Logo Image Container */}
+                    <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 p-1.5 flex items-center justify-center shrink-0 overflow-hidden group-hover:border-slate-700 transition-colors">
+                      {client.image ? (
+                        <img
+                          src={resolveAsset(client.image)}
+                          alt={`${client.name} logo`}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <span className="text-xs font-bold font-display text-cyan-400 tracking-wider">
+                          {client.name.split(' ').map(w => w[0]).join('').slice(0, 3)}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="space-y-0.5 min-w-0">
+                      <p className="text-sm font-bold text-slate-100 truncate group-hover:text-cyan-300 transition-colors">
+                        {client.name}
+                      </p>
+                      <p className="text-[11px] text-cyan-400 font-medium">
+                        {client.category}
+                      </p>
+                      <p className="text-[11px] text-slate-400 truncate leading-snug">
+                        {client.highlight}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
 
