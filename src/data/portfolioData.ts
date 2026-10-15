@@ -1,3 +1,8 @@
+import kelectricImg from '../assets/images/kelectric_brand_intelligence.jpg';
+import shaistaImg from '../assets/images/shaista_creative_aesthetic.jpg';
+import nakooshImg from '../assets/images/nakoosh_fashion_campaign.jpg';
+import jinnahImg from '../assets/images/jinnah_builders_marketing.jpg';
+
 export interface ProjectItem {
   id: string;
   title: string;
@@ -184,7 +189,7 @@ export const PORTFOLIO_DATA = {
       impact: 'Maintained proactive brand health visibility across municipal power shifts, reducing escalation turnaround times and feeding critical customer feedback directly to operational leaders.',
       role: 'Social Media Listening & Brand Specialist',
       tools: ['Meltwater', 'SAP S/4HANA', 'Crisis Escalations', 'Customer Chat Support', 'Sentiment Analysis'],
-      image: 'assets/images/kelectric_brand_intelligence.jpg',
+      image: kelectricImg,
       featured: true,
       deliverables: ['Meltwater Query Architecture', 'Escalation Playbooks', 'SAP Case Routing', 'Daily Sentiment Summaries']
     },
@@ -200,7 +205,7 @@ export const PORTFOLIO_DATA = {
       impact: 'Significantly elevated non-branded search engine rankings for aesthetic clinical procedures in Karachi while creating a seamless digital shopping experience for celebrity skincare lines.',
       role: 'SEO & Social Media Marketing Manager',
       tools: ['Shopify', 'On-Page SEO', 'Off-Page SEO', 'Copywriting', 'Content Strategy', 'Meta Business Suite'],
-      image: 'assets/images/shaista_creative_aesthetic.jpg',
+      image: shaistaImg,
       featured: true,
       deliverables: ['Treatment FAQ Documentation', 'Shopify Store Management', 'Creative Concepts', 'Technical SEO Roadmap']
     },
@@ -216,7 +221,7 @@ export const PORTFOLIO_DATA = {
       impact: 'Achieved high social engagement and direct customer orders across Facebook & Instagram channels, establishing strong brand recall for seasonal collections.',
       role: 'SMM & SEO Specialist',
       tools: ['Digital Content Editing', 'Social Ad Design', 'Instagram Marketing', 'Meta Ads', 'Adobe Photoshop'],
-      image: 'assets/images/nakoosh_fashion_campaign.jpg',
+      image: nakooshImg,
       featured: true,
       deliverables: ['Seasonal Ad Suites', 'Product Banner Suites', 'Ad Copywriting', 'E-Commerce Product Copy']
     },
@@ -232,7 +237,7 @@ export const PORTFOLIO_DATA = {
       impact: 'Delivered consistent streams of qualified lead submissions to the sales desk while establishing a credible modern online real estate presence.',
       role: 'Digital Marketer & Web Developer',
       tools: ['Facebook Lead Ads', 'Meta Ads Manager', 'Web Design', 'Web Development', 'On-Page SEO'],
-      image: 'assets/images/jinnah_builders_marketing.jpg',
+      image: jinnahImg,
       featured: true,
       deliverables: ['Meta Lead Ad Creatives', 'Responsive Web Layouts', 'Lead Form Automation', 'Investor Pitch Collateral']
     },
@@ -248,7 +253,7 @@ export const PORTFOLIO_DATA = {
       impact: 'Created evergreen search assets that educate consumers on credit platforms while funneling readers toward personalized financial advisory sessions.',
       role: 'Content Strategist & SEO Specialist',
       tools: ['SEO Content Strategy', 'Copywriting', 'Infographic Design', 'Keyword Research', 'SEMrush'],
-      image: 'assets/images/kelectric_brand_intelligence.jpg',
+      image: kelectricImg,
       featured: false,
       deliverables: ['Long-form Research Articles', 'Credit Guide Infographic', 'Keyword Mapping Document']
     },
@@ -264,7 +269,7 @@ export const PORTFOLIO_DATA = {
       impact: 'Enabled the clinic to launch with a unified, premium visual signature that instills immediate client trust.',
       role: 'Brand Designer',
       tools: ['Adobe Photoshop', 'Brand Identity', 'Typography', 'Logo Design', 'Vector Illustration'],
-      image: 'assets/images/shaista_creative_aesthetic.jpg',
+      image: shaistaImg,
       featured: false,
       deliverables: ['Primary Brand Logomark', 'Vector Asset Suite', 'Social Profile Avatars', 'Usage Guidelines']
     }

@@ -2,8 +2,18 @@
 export const resolveAsset = (path: string): string => {
   if (!path) return '';
   
-  // Return absolute external URLs as-is
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+  // Return absolute external URLs or data/blob as-is
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://') ||
+    path.startsWith('data:') ||
+    path.startsWith('blob:')
+  ) {
+    return path;
+  }
+
+  // If it is already a Vite-bundled relative path starting with ./assets/
+  if (path.startsWith('./assets/') || path.startsWith('./')) {
     return path;
   }
 

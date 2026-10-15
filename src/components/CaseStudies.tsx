@@ -71,7 +71,7 @@ export const CaseStudies = ({ onSelectProject }: CaseStudiesProps) => {
               {/* Media Preview Box */}
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
                 <img
-                  src={resolveAsset(project.image)}
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"

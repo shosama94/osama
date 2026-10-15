@@ -1,6 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { User, Sparkles, TrendingUp, ShieldCheck, Target, Play, Pause, Volume2, VolumeX, Video } from 'lucide-react';
-import { resolveAsset } from '../utils/assets';
+import jinnahLogo from '../assets/clients/jinnah_builders.png';
+import digitalGravityLogo from '../assets/clients/digital_gravity.jpg';
+import reliableLogo from '../assets/clients/reliable_technical_services.png';
+import capitalHealthLogo from '../assets/clients/capital_health.jpg';
+import denimCraftsLogo from '../assets/clients/denim_crafts.jpeg';
+import digitalExpressLogo from '../assets/clients/digital_express.png';
+import nakooshVideo from '../assets/clients/nakoosh_client_campaign.mp4';
 
 interface ClientItem {
   name: string;
@@ -62,13 +68,13 @@ export const AboutSection: React.FC = () => {
     {
       name: 'Jinnah Builders',
       category: 'Bahria Town Real Estate',
-      image: 'assets/clients/jinnah_builders.png',
+      image: jinnahLogo,
       highlight: 'Targeted Facebook Lead Ads & Real Estate Web Architecture'
     },
     {
       name: 'Digital Gravity',
       category: 'Digital Agency',
-      image: 'assets/clients/digital_gravity.jpg',
+      image: digitalGravityLogo,
       highlight: 'Technical SEO Audits, Backlink Building & SERP Intelligence'
     },
     {
@@ -79,25 +85,25 @@ export const AboutSection: React.FC = () => {
     {
       name: 'Reliable Technical Services',
       category: 'Engineering & Services',
-      image: 'assets/clients/reliable_technical_services.png',
+      image: reliableLogo,
       highlight: 'B2B Brand Footprint & Organic Search Visibility'
     },
     {
       name: 'Capital Health (CHSC)',
       category: 'Healthcare & Clinical Services',
-      image: 'assets/clients/capital_health.jpg',
+      image: capitalHealthLogo,
       highlight: 'Digital Healthcare Marketing & Social Positioning'
     },
     {
       name: 'Denim Crafts',
       category: 'Textile & Apparel Export',
-      image: 'assets/clients/denim_crafts.jpeg',
+      image: denimCraftsLogo,
       highlight: 'E-commerce Media Production & Brand Presentation'
     },
     {
       name: 'Digital Express',
       category: 'Marketing Solutions',
-      image: 'assets/clients/digital_express.png',
+      image: digitalExpressLogo,
       highlight: 'Paid Performance Ad Management & Social Media Handling'
     },
     {
@@ -177,7 +183,7 @@ export const AboutSection: React.FC = () => {
                   onClick={togglePlay}
                   title="Click to toggle playback"
                 >
-                  <source src={resolveAsset('assets/clients/nakoosh_client_campaign.mp4')} type="video/mp4" />
+                  <source src={nakooshVideo} type="video/mp4" />
                 </video>
 
                 {/* Floating Media Controls */}
@@ -229,7 +235,7 @@ export const AboutSection: React.FC = () => {
                     <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 p-1.5 flex items-center justify-center shrink-0 overflow-hidden group-hover:border-slate-700 transition-colors">
                       {client.image ? (
                         <img
-                          src={resolveAsset(client.image)}
+                          src={client.image}
                           alt={`${client.name} logo`}
                           className="w-full h-full object-contain"
                           loading="lazy"

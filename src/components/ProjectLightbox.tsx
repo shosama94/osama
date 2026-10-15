@@ -89,7 +89,7 @@ export const ProjectLightbox: React.FC<ProjectLightboxProps> = ({
             </video>
           ) : (
             <img
-              src={resolveAsset(project.image)}
+              src={project.image}
               alt={project.title}
               className="w-full h-full object-cover"
             />
